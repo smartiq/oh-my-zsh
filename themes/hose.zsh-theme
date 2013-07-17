@@ -11,7 +11,7 @@ function hg_prompt_info {
 <%{$fg[magenta]%}<root|basename>%{$reset_color%}@><%{$fg[red]%}<branch>%{$reset_color%}>\
 < at %{$fg[yellow]%}<tags|%{$reset_color%}, %{$fg[yellow]%}>%{$reset_color%}>\
 %{$fg[green]%}<status|modified|unknown><update>%{$reset_color%}<
-patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null
+patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset_color%})|pre_unapplied(%{$fg_bold[black]%})|post_unapplied(%{$reset_color%})>>" 2>/dev/null && echo -e "\n%{$reset_color%}"
 }
 
 function box_name {
@@ -25,11 +25,10 @@ function prompt_char {
     echo '○'
 }
 
-PROMPT='%{$fg_bold[green]%}%n%{$reset_color%}@%{$fg_bold[green]%}$(box_name)%{$reset_color%}:$(hg_prompt_info)$(git_prompt_info)
-$(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%} $(prompt_char) '
+PROMPT=$'%{$fg_bold[green]%}%n%{$reset_color%}@%{$fg_bold[green]%}$(box_name)%{$reset_color%}:$(hg_prompt_info)$(git_prompt_info)$(virtualenv_info)%(?,,%{${fg_bold[white]}%}[%?]%{$reset_color%} )%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%} $(prompt_char) '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="@%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="\n%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}!"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[green]%}?"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
